@@ -24,7 +24,7 @@ def after_request(response):
     return response
 
 # Custom filter
-app.jinja_env.filters["usd"] = usd
+
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -39,12 +39,32 @@ db = SQL("sqlite:///FP.db")
 @app.route("/")
 @login_required
 def index():
+    return render_template("index.html")
 
 
 
 
+@app.route("/submit-review", methods=["POST"])
+@login_required
+def submitReview():
+    if request.method == "POST":
+        shopname = request.form.get("shopname")
+        username = session['username']
+        outoften = request.form.get("outoften")
+        review = request.form.get("review")
+        result = db.execute("INSERT into posts(shopname, username, outoften, review) VALUES(:shopname, :username, :outoften, :review) ",
+        shopname = shopname,
+        username = username,
+        outoften = outoften,
+        review = review
+        )
+    return render_template("shop1.html")
 
 
+@app.route("/shop1")
+@login_required
+def shop1():
+    return render_template("shop1.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -70,10 +90,11 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return apology("wrong user or pass ", 403)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
+        session["username"] = rows[0]["username"]
 
         # Redirect user to home page
         return redirect("/")
@@ -142,5 +163,5 @@ def check():
 
 
 # Listen for errors
-for code in default_exceptions:
-    app.errorhandler(code)(errorhandler)
+##for code in default_exceptions:
+  #  app.errorhandler(code)(errorhandler)
