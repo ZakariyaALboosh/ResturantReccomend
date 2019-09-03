@@ -35,7 +35,7 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///FP.db")
 
-
+#homepage route
 @app.route("/")
 @login_required
 def index():
@@ -47,6 +47,7 @@ def index():
 @app.route("/submit-review", methods=["POST"])
 @login_required
 def submitReview():
+    #enters review into database table posts
     if request.method == "POST":
         shopname = request.form.get("shopname")
         username = session['username']
@@ -62,16 +63,19 @@ def submitReview():
     return redirect("/" + shopname)
 
 
+
+#route for each resturant
 @app.route("/shop1")
 @login_required
 def shop1():
+    #shows reviews and renders template for submitting
     posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = "shop1")
     return render_template("shop1.html", posts = posts)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
-
+#self explanatory
     # Forget any user_id
     session.clear()
 
@@ -149,7 +153,7 @@ def register():
 
 
 
-
+#error handler by cs50
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
@@ -166,6 +170,6 @@ def check():
         return jsonify(False)
 
 
-# Listen for errors
-##for code in default_exceptions:
-  #  app.errorhandler(code)(errorhandler)
+#Listen for errors
+for code in default_exceptions:
+    app.errorhandler(code)(errorhandler)

@@ -1,3 +1,4 @@
+/* css grid layout for home page (shop selection selection) */
 .grid-container-home{
 /* HOME PAGE*/
   display: grid;
@@ -61,7 +62,7 @@
   height: auto;
 }
 
-
+/*css grid layout for review box */
 .review{
     border-radius: 0.75em;
     margin: 1em;
@@ -91,7 +92,7 @@
     grid-area: rating;
 }
 .rev{
-        margin-left: 0.4rem;
+    margin-left: 0.4rem;
     grid-area: rev;
     word-wrap: break-word;
 }
