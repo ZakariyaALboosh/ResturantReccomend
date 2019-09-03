@@ -14,6 +14,7 @@
 
         {% block stylesheet %}{% endblock %}
 
+        <link href="/static/styles.css" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -33,15 +34,26 @@
             <div class="collapse navbar-collapse" id="navbar">
                 {% if session.user_id %}
                     <ul class="navbar-nav mr-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">#</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">#</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">#</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">#</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">#</a></li>
-                    </ul>
+
+                    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shops
+        </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/shop1">shop1</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+      </li></ul>
                     <ul class="navbar-nav ml-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
                     </ul>
+
                 {% else %}
                     <ul class="navbar-nav ml-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>

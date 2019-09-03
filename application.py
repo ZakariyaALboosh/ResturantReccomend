@@ -59,7 +59,7 @@ def submitReview():
         review = review
         )
     posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
-    return render_template(shopname + ".html", posts = posts)
+    return redirect("/" + shopname)
 
 
 @app.route("/shop1")
@@ -138,6 +138,8 @@ def register():
                 return apology("database error")
             new = db.execute("SELECT * FROM users WHERE username = :username", username=username)
             session["user_id"] = new[0]["id"]
+            session["username"] = new[0]["username"]
+
             return redirect("/")
         else:
             return apology("username taken", 400)

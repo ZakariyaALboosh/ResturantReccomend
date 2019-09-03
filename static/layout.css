@@ -1,0 +1,32 @@
+
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #FFFFFF;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #212121 ;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #FFEB3B ;
+}
+
+#logout{
+    background: #FFFFFF;
+    border-radius: 1rem;
+}
+
+
+
+.dark-primary-color    { background: #D32F2F; }
+.default-primary-color { background: #F44336; }
+.light-primary-color   { background: #FFCDD2; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FFEB3B; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
