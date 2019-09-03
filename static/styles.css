@@ -60,3 +60,37 @@
   display: block;
   height: auto;
 }
+
+
+.review{
+    margin: 1em;
+    display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr  ;
+     grid-template-rows: 1fr 1fr auto 1fr 1fr ;
+
+    background-color: #FFF176;
+  grid-template-areas:
+  "name . user . ."
+  "rating . . . ."
+  "rev rev rev rev rev"
+  ". . . . ."
+  "date date . . .";
+}
+
+.revname{
+    grid-area: name;
+}
+.revuser{
+    grid-area: user;
+
+}
+.revrating{
+    grid-area: rating;
+}
+.rev{
+    grid-area: rev;
+    word-wrap: break-word;
+}
+.revdate{
+    grid-area: date;
+}

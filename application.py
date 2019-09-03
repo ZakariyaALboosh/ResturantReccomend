@@ -58,13 +58,15 @@ def submitReview():
         outoften = outoften,
         review = review
         )
-    return render_template("shop1.html")
+    posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
+    return render_template(shopname + ".html", posts = posts)
 
 
 @app.route("/shop1")
 @login_required
 def shop1():
-    return render_template("shop1.html")
+    posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = "shop1")
+    return render_template("shop1.html", posts = posts)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

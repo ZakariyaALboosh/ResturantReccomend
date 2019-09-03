@@ -11,6 +11,23 @@
       <img id="cafe-logo" src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg" alt="Smiley face" height="auto" width="auto">
      </div>
 
+
+   {% for post in posts%}
+
+        <div class = "review">
+        <h6 class ="revname">name: </h6><h4  class ="revuser">{{post.username}}</h4>
+        <p class= "revrating">Rating: {{post.outoften}}/10</p>
+          <p  class = "rev">
+              {{post.review}}
+              dzsfxcgvbj,dkjsn.lkndsaflkn va/lskb vldbfvasldb jbajb vkahbsdvbasb ihkvbasbikvbdsjabvj,hfbhbdsghvjabkhdhvcjubasdguhygvbchujvsdabhujvcukvbsdghvgb ahvhjvgashyugbvyhkugabvhsdvcukhavgdhvcaysyvcaghacvhyvl,jduvgbshgvbldausgbvhvsaugb
+
+          </p>
+          <p class = "revdate"><small >{{post.time}}</small> </p>
+        </div>
+
+    {% endfor %}
+
+
      <form action="/submit-review" method="post">
   <div class="form-group">
       <input type="hidden" name="shopname" value="shop1" />
