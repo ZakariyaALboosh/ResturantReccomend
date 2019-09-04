@@ -16,10 +16,15 @@
 
 }
 .grid-item{
-    height: 200px;
-    width: 100% ;
-    background-color: yellow;
+    height: auto;
+    width: auto ;
 
+
+}
+.cafe-logo{
+    overflow: hidden;
+
+    width: 100%;
 }
 
 #hgrid-item1{

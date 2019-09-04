@@ -12,7 +12,7 @@
  <!-- shop cafe logo or photo  -->    <img id="cafe-logo" src="/static/{{image}}" alt="Place Logo" height="auto" width="auto">
      </div>
         <div class = "review">
-              <h4 class = "revname">{{placeinfo[0].shopname}}</h4>
+              <h4 class = "revname">{{placeinfo[0].shopname}}  rating: {{rating}}/10</h4>
             <p class = "revrating">{{placeinfo[0].address}} <small>Type:{{placeinfo[0].type}}</small> </p>
             <p  class = "rev">
                {{placeinfo[0].description}}
@@ -68,13 +68,13 @@
     <textarea name = "review" class="form-control" id="exampleFormControlTextarea1"></textarea>
   </div>
     <button type="submit" class="btn btn-primary mb-2">publish review</button>
-    {%else%}
+    </form>{%else%}
         <div class = "review">
             <p  class = "rev">
              404  There in no such place or it wasn't added yet, SORRY! 404
         </div>
     {%endif%}
-</form>
+
 
 
 {% endblock %}

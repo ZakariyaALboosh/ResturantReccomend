@@ -43,6 +43,38 @@ def index():
 
 
 
+@app.route("/myposts", methods=["GET","POST"])
+@login_required
+def myposts():
+    if request.method == "POST":
+        if request.form.get("verb") == "delete" :
+            postid = request.form.get("id")
+            reuslt = db.execute("DELETE FROM posts WHERE id= :postid", postid = postid)
+            posts = db.execute("SELECT * FROM posts WHERE username = :username", username = session['username'])
+            return render_template("myposts.html", posts = posts)
+        if request.form.get("verb") == "edit" :
+            postid = request.form.get("id")
+            result = db.execute("SELECT * FROM posts WHERE id= :postid", postid = postid)
+            return render_template("edit.html", posts = result)
+
+    posts = db.execute("SELECT * FROM posts WHERE username = :username", username = session['username'])
+    return render_template("myposts.html", posts = posts)
+
+@app.route("/edit-review", methods=["POST"])
+@login_required
+def edit():
+    postid = request.form.get("id")
+    review = request.form.get("review")
+    outoften = request.form.get("outoften")
+    db.execute("UPDATE posts SET review = :review , outoften = :outoften WHERE id = :postid", review = review, outoften = outoften, postid = postid)
+    return redirect("/myposts")
+
+
+
+@app.route("/about")
+@login_required
+def about():
+    return render_template("about.html")
 
 @app.route("/submit-review", methods=["POST"])
 @login_required
@@ -69,13 +101,16 @@ def submitReview():
 @login_required
 def shop(shopname):
     shopname = urllib.parse.unquote(shopname)
-    print("HERE HERE   " + shopname)
+
     #shows reviews and renders template for submitting
     placeinfo = db.execute("SELECT * FROM placeinfo WHERE shopname = :shopname", shopname = shopname)
+    result = db.execute("SELECT avg(outoften) FROM posts WHERE shopname = :shopname ", shopname = shopname)
+    rating = result[0]['avg(outoften)']
+
     posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
     image = shopname + ".jpg"
     place = shopname
-    return render_template("shop.html", posts = posts, image = image, place = place, placeinfo = placeinfo)
+    return render_template("shop.html", posts = posts, image = image, place = place, placeinfo = placeinfo, rating =rating)
 
 
 

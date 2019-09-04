@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{%block stylesheet%}
+        <link href="/static/styles.css" rel="stylesheet">
+{% endblock %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    {% if posts%}
+   {% for post in posts%}
+
+        <div class = "review">
+        <h4  class ="revname">{{post.shopname}}</h4>
+        <p class= "revrating">Rating: {{post.outoften}}/10</p>
+          <p  class = "rev">
+              {{post.review}}
+
+          </p>
+          <p class = "revdate"><small >{{post.time}}</small> </p>
+        </div>
+
+        <form action="/myposts" method="post">
+  <div class="form-group">
+      <input type="hidden" name="verb" value= "delete">
+  </div>
+  <input type="hidden" name="id" value= "{{post.id}}">
+  </div>
+    <button type="submit" class="btn btn-primary mb-2">DELETE REVIEW</button>
+    </form>
+
+
+    <form action="/myposts" method="post">
+    <div class="form-group">
+      <input type="hidden" name="verb" value= "edit">
+  </div>
+  <input type="hidden" name="id" value= "{{post.id}}">
+  </div>
+    <button type="submit" class="btn btn-primary mb-2">EDIT REVIEW</button>
+    </form>
+    {% endfor %}
+    {%else%}
+        <div class = "review">
+            <p  class = "rev">
+               there isn't any reviews, yet!
+          </p>
+        </div>
+    {%endif%}
+
+{% endblock %}
