@@ -1,5 +1,5 @@
 import os
-
+import urllib.parse
 from cs50 import SQL
 from flask import Flask, flash, jsonify, json, redirect, render_template, request, session
 from flask_session import Session
@@ -60,18 +60,22 @@ def submitReview():
         review = review
         )
     posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
-    return redirect("/" + shopname)
+    return redirect("/place/" + shopname)
 
 
 
 #route for each resturant
-@app.route("/shop/<string:shopname>", methods=["GET"])
+@app.route("/place/<string:shopname>", methods=["GET"])
 @login_required
 def shop(shopname):
+    shopname = urllib.parse.unquote(shopname)
+    print("HERE HERE   " + shopname)
     #shows reviews and renders template for submitting
+    placeinfo = db.execute("SELECT * FROM placeinfo WHERE shopname = :shopname", shopname = shopname)
     posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
     image = shopname + ".jpg"
-    return render_template("shop.html", posts = posts, image = image)
+    place = shopname
+    return render_template("shop.html", posts = posts, image = image, place = place, placeinfo = placeinfo)
 
 
 

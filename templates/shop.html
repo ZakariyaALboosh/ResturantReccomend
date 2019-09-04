@@ -7,10 +7,18 @@
 {% endblock %}
 
 {% block main %}
+    {% if placeinfo%}
    <div>
- <!-- shop cafe logo or photo  -->    <img id="cafe-logo" src="/static/{{image}}" alt="Shop Logo" height="auto" width="auto">
+ <!-- shop cafe logo or photo  -->    <img id="cafe-logo" src="/static/{{image}}" alt="Place Logo" height="auto" width="auto">
      </div>
-
+        <div class = "review">
+              <h4 class = "revname">{{placeinfo[0].shopname}}</h4>
+            <p class = "revrating">{{placeinfo[0].address}} <small>Type:{{placeinfo[0].type}}</small> </p>
+            <p  class = "rev">
+               {{placeinfo[0].description}}
+          </p>
+          <p class = "revdate"><small>{{placeinfo[0].phone}}</small></p>
+        </div>
  <!-- Loop in jinja to show posts from select query executed using db.execute -->
      {% if posts%}
    {% for post in posts%}
@@ -36,7 +44,7 @@
 <!-- passing in shopname with form hidden because each shop has its own page and dont want it to be modified by user -->
      <form action="/submit-review" method="post">
   <div class="form-group">
-      <input type="hidden" name="shopname" value="shop1" />
+      <input type="hidden" name="shopname" value= "{{placeinfo[0].shopname}}">
   </div>
 
   <!-- Review form includes rating from 10 and review text -->
@@ -60,7 +68,12 @@
     <textarea name = "review" class="form-control" id="exampleFormControlTextarea1"></textarea>
   </div>
     <button type="submit" class="btn btn-primary mb-2">publish review</button>
-
+    {%else%}
+        <div class = "review">
+            <p  class = "rev">
+             404  There in no such place or it wasn't added yet, SORRY! 404
+        </div>
+    {%endif%}
 </form>
 
 
