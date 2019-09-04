@@ -8,10 +8,11 @@
 
 {% block main %}
    <div>
- <!-- shop cafe logo or photo -->     <img id="cafe-logo" src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg" alt="Smiley face" height="auto" width="auto">
+ <!-- shop cafe logo or photo  -->    <img id="cafe-logo" src="/static/{{image}}" alt="Shop Logo" height="auto" width="auto">
      </div>
 
  <!-- Loop in jinja to show posts from select query executed using db.execute -->
+     {% if posts%}
    {% for post in posts%}
 
         <div class = "review">
@@ -25,7 +26,13 @@
         </div>
 
     {% endfor %}
-
+    {%else%}
+        <div class = "review">
+            <p  class = "rev">
+               there isn't any reviews, yet!
+          </p>
+        </div>
+    {%endif%}
 <!-- passing in shopname with form hidden because each shop has its own page and dont want it to be modified by user -->
      <form action="/submit-review" method="post">
   <div class="form-group">

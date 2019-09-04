@@ -65,12 +65,15 @@ def submitReview():
 
 
 #route for each resturant
-@app.route("/shop1")
+@app.route("/shop/<string:shopname>", methods=["GET"])
 @login_required
-def shop1():
+def shop(shopname):
     #shows reviews and renders template for submitting
-    posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = "shop1")
-    return render_template("shop1.html", posts = posts)
+    posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
+    image = shopname + ".jpg"
+    return render_template("shop.html", posts = posts, image = image)
+
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
