@@ -12,19 +12,19 @@
  <!-- shop cafe logo or photo  -->    <img id="cafe-logo" src="/static/{{image}}" alt="Place Logo" height="auto" width="auto">
      </div>
         <div class = "review">
-              <h4 class = "revname">{{placeinfo[0].shopname}}  rating: {{rating}}/10</h4>
-            <p class = "revrating">{{placeinfo[0].address}} <small>Type:{{placeinfo[0].type}}</small> </p>
+              <h4 class = "revname"><strong>{{placeinfo[0].shopname}}</strong>  </h4>
+            <p class = "revrating"> <small>rating: {{rating}}/10  | Type:{{placeinfo[0].type}}</small> </p>
             <p  class = "rev">
                {{placeinfo[0].description}}
           </p>
-          <p class = "revdate"><small>{{placeinfo[0].phone}}</small></p>
+          <p class = "revdate"><small>{{placeinfo[0].phone}} | {{placeinfo[0].address}}</small></p>
         </div>
  <!-- Loop in jinja to show posts from select query executed using db.execute -->
      {% if posts%}
    {% for post in posts%}
 
         <div class = "review">
-        <h6 class ="revname">name: </h6><h4  class ="revuser">{{post.username}}</h4>
+        <h6 class ="revname">name: </h6><h4  class ="revuser"><strong>{{post.username}}</strong></h4>
         <p class= "revrating">Rating: {{post.outoften}}/10</p>
           <p  class = "rev">
               {{post.review}}

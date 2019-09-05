@@ -77,13 +77,13 @@
   grid-template-columns: auto auto auto auto auto  ;
      grid-template-rows: auto auto auto auto auto ;
 
-    background-color: #FFF176;
+    background-color: rgba(255,195,0, 1);
   grid-template-areas:
-  "name user . . ."
-  "rating . . . ."
+  "name user user . ."
+  "rating rating . . ."
   "rev rev rev rev rev"
   ". . . . ."
-  "date date . . .";
+  "date date date . .";
 }
 
 .revname{

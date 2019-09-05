@@ -10,6 +10,7 @@
 
         <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lalezar&display=swap" rel="stylesheet">
 
 
         {% block stylesheet %}{% endblock %}
@@ -26,22 +27,24 @@
 
     <body >
 
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
-            <a class="navbar-brand" href="/">Food</span></a>
-            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button><!-- navigation bar -->
+        <nav class="navbar navbar-expand-md navbar-light border" style="background-color:  #be0c0c;">
+
+            <!-- navigation bar -->
             <div class="collapse navbar-collapse" id="navbar">
                 {% if session.user_id %}
+                <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/logout">تسجيل خروج</a></li>
+                    </ul>
+
                     <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/myposts">My posts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">الرئيسية</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">عنا</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/myposts">ريفيواتي</a></li>
 
 
                     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Shops
+          المطاعم
         </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="/place/shop1">shop1</a>
@@ -49,9 +52,7 @@
 
                 </div>
       </li></ul>
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                    </ul>
+
 
                 {% else %}
                     <ul class="navbar-nav ml-auto mt-2">
@@ -60,6 +61,10 @@
                     </ul>
                 {% endif %}
             </div>
+            <a class="navbar-brand" href="/" style = "color: #ffc300; font-family: 'Lalezar', cursive; font-size: 2em;">ماكلتي</span></a>
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </nav>
 
         {% if get_flashed_messages() %}
@@ -72,7 +77,7 @@
 
         <main class="container p-5 " id = "main" >
             {% block main %}{% endblock %}
-        </main>
+        </main >
 
         <footer class="small text-center text-muted">
         </footer>
