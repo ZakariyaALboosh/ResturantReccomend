@@ -45,27 +45,34 @@ def index():
 
 @app.route("/myposts", methods=["GET","POST"])
 @login_required
+#renders template with all posts of the current user
+#enables deletion and editing of post
 def myposts():
+    # if one of the buttons was clicked (delete or edit)
     if request.method == "POST":
+    #if the button was delete delete post from database
         if request.form.get("verb") == "delete" :
             postid = request.form.get("id")
             reuslt = db.execute("DELETE FROM posts WHERE id= :postid", postid = postid)
             posts = db.execute("SELECT * FROM posts WHERE username = :username", username = session['username'])
             return render_template("myposts.html", posts = posts)
+            #if the button was edit open the chosen post in a new page wich enables you to edit then resubmit the post
         if request.form.get("verb") == "edit" :
             postid = request.form.get("id")
             result = db.execute("SELECT * FROM posts WHERE id= :postid", postid = postid)
             return render_template("edit.html", posts = result)
-
+#renders template with all posts of the current user
     posts = db.execute("SELECT * FROM posts WHERE username = :username", username = session['username'])
     return render_template("myposts.html", posts = posts)
 
 @app.route("/edit-review", methods=["POST"])
 @login_required
+#route for when editing of the post is finished and to be submitted
 def edit():
     postid = request.form.get("id")
     review = request.form.get("review")
     outoften = request.form.get("outoften")
+    # databse execute to update post from form
     db.execute("UPDATE posts SET review = :review , outoften = :outoften WHERE id = :postid", review = review, outoften = outoften, postid = postid)
     return redirect("/myposts")
 
@@ -74,6 +81,7 @@ def edit():
 @app.route("/about")
 @login_required
 def about():
+    #simple about page
     return render_template("about.html")
 
 @app.route("/submit-review", methods=["POST"])
@@ -91,12 +99,13 @@ def submitReview():
         outoften = outoften,
         review = review
         )
+    # get reviews back and show them in the places' page
     posts = db.execute("SELECT * FROM posts WHERE shopname = :shopname", shopname = shopname)
     return redirect("/place/" + shopname)
 
 
 
-#route for each resturant
+#route for all places cafes and shops
 @app.route("/place/<string:shopname>", methods=["GET"])
 @login_required
 def shop(shopname):
